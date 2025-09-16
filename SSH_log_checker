@@ -1,7 +1,7 @@
 #!/bin/bash
 
 logfile=$(journalctl -u ssh.service | grep "Failed password" | awk '{print $11}' | sort | uniq -c | xargs -n 2 | awk '$1>2 { print $2}')
-echo "The Failed Logins is/are: $logfile"
+echo $logfile | tee -a ssh.log
 
 read -p "Do you want to block this/these IPs (y/n)? " choice
 
