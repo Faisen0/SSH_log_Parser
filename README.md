@@ -1,104 +1,38 @@
-# SSH Log Parser 
-SSH Security Log Parser & IP Blocker
-
-A lightweight Bash tool to monitor SSH login attempts, log offending IPs, and optionally block them while providing additional WHOIS information for auditing.
-
-# Features
-Monitor Failed SSH Logins
-Extracts failed login attempts from journalctl for ssh.service.
-
-IP Blocking
-Prompts the user to block offending IPs via ufw.
-
-Logging
-All blocked IPs are logged to ssh.log using tee so the log file receives entries while the terminal prints IPs in real-time.
-
-WHOIS Lookup
-Queries blocked IPs to retrieve ownership information for auditing purposes.
-
-Threshold-based detection
-Automatically identifies IPs with repeated failed login attempts (default: 3).
-
-# Installation
-Clone the repository:
-
-git clone https://github.com/Faisen0/SSH_log_Parser.git
-cd SSH_log_Parser
+# Project Objectives
+The goals of this project were designed to combine practical scripting, security monitoring, and GitHub workflow skills. Specifically, I aimed to:
+- Build a functional security tool
+- Track failed SSH login attempts.
+- Identify offending IPs and optionally block them.
+- Practice GitHub workflow and version control
+- Create a repository with proper structure, README, .gitignore, and license.
+- Use feature branches for each addition.
+- Make all changes via pull requests.
+- Write clear, descriptive commits and link them to issues for tracking.
+- Practice project management skills
+- Track tasks and improvements through GitHub Issues.
+- Organize work visually with a Kanban board.
+- Simulate code review even as a solo developer to evaluate and improve my own work.
+- Improve documentation and communication
+- Clearly communicate known issues and future enhancements.
+- Tag stable versions (e.g. v1.0.0) and write release notes summarizing features and fixes.
+- Learn how to maintain a clean, stable main branch while developing new features.
 
 
 
-Make the script executable:
+# Known Issues
+Firewall configuration required: ufw must be set up properly to allow IP blocking.
 
-chmod +x ssh_log_parser.sh
+WHOIS lookup may fail: Some IPs may not return ownership info or may take longer depending on network conditions.
 
-# Requirements
-Ensure ufw is installed if you want to block IPs.
+Log file permissions: Running the script without sufficient permissions may prevent writing to 
 
-Optionally, ensure whois is installed for IP lookup:
+# Future Improvements
+Automatic WHOIS logging: Store WHOIS information for blocked IPs in the log file for auditing.
 
-sudo apt install whois
+Configurable thresholds: Allow custom thresholds for failed SSH attempts before blocking.
 
+Enhanced review output: Summarize blocked IPs, failed attempts, and WHOIS info at the end of script runs.
 
-# Usage
-Run the script:
+Notification integration: Send alerts via email or messaging platforms when new IPs are blocked.
 
-./ssh_log_parser.sh
-
-
-Example behavior:
-The Failed Logins is/are:
-192.168.1.101
-192.168.1.102
-
-After listing the IPs, you are prompted to block them:
-
-Do you want to block these IPs? (y/n)
-
-
-WHOIS lookup will print ownership info alongside each IP if enabled and save them to lookup.txt 
-
-ssh.log contains all blocked IPs .
-
-This file is ignored by Git (via .gitignore) to prevent accidental commits of runtime logs.
-
-
-Example log entry:
-
-192.168.1.101
-
-
-GitHub Workflow
-
-Branches are used for features like feature/firewall-block or feature/lookup.
-
-Use commit messages referencing issues to automatically close them:
-
-Closes #1
-
-
-
-Pull Requests summarize features and link commits/issues.
-
-.gitignore ensures log files are never pushed accidentally.
-
-
-# Security Notes
-
-When enabling IP blocking on a live system:
-
-Ensure your own IP is not accidentally blocked.
-
-Use SSH keys instead of passwords for safer authentication.
-
-Consider running the script with sudo only when necessary.
-
-
-# Future Enhancements
-
-Automatic WHOIS logging to the log file.
-
-Support for custom thresholds and automatic unblocking.
-
-Integration with alerting or notification systems.
-
-Optional reverse SSH setup for devices behind NAT/mobile networks.
+Web dashboard: Optional interface for monitoring failed SSH attempts and blocked IPs visually
