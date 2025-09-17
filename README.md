@@ -36,3 +36,7 @@ Enhanced review output: Summarize blocked IPs, failed attempts, and WHOIS info a
 Notification integration: Send alerts via email or messaging platforms when new IPs are blocked.
 
 Web dashboard: Optional interface for monitoring failed SSH attempts and blocked IPs visually
+
+## Project Board
+
+You can track the progress of this project on the [Kanban board](https://github.com/users/Faisen0/projects/2/views/1).
