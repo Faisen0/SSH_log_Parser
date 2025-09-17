@@ -1,7 +1,12 @@
 #!/bin/bash
 
 logfile=$(journalctl -u ssh.service | grep "Failed password" | awk '{print $11}' | sort | uniq -c | xargs -n 2 | awk '$1>2 { print $2}')
+echo "The IPs from the failed logins is/are:"
 echo $logfile | tee -a ssh.log
+
+for ip in $logfile; do
+    whois ip >> lookup.txt
+done
 
 read -p "Do you want to block this/these IPs (y/n)? " choice
 
