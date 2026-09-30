@@ -5,7 +5,7 @@ echo "The IPs from the failed logins is/are:"
 echo $logfile | tee -a ssh.log
 
 for ip in $logfile; do
-    whois ip >> lookup.txt
+    whois $ip >> lookup.txt
 done
 
 read -p "Do you want to block this/these IPs (y/n)? " choice
